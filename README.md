@@ -149,7 +149,7 @@ startup_diagnostics:
 ./start_bird_detector_cron_screen.sh
 
 # Или напрямую (для тестирования)
-source /path/to/venv/bin/activate
+source /home/pi/projects/Hailo8_projects/Bird_Detector/venv/bin/activate
 python3 bird_detector_v5_5.py --input rpi
 ```
 
