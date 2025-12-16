@@ -1,0 +1,19 @@
+# Video Creator dependencies
+# Core dependencies
+PyYAML>=6.0         # YAML configuration parsing
+moviepy>=1.0.3      # Video editing and audio processing (required for audio support)
+pathlib>=1.0        # Path handling (built-in in Python 3.4+)
+
+# Optional dependencies for advanced features
+Pillow>=9.0.0       # Image processing (optional)
+tqdm>=4.64.0        # Progress bars (optional)
+
+# System requirements (install separately):
+# - ffmpeg (required)
+# - Python 3.11+
+
+
+# Виртуальное окружение 
+# python3 -m venv venv
+# source venv/bin/activate
+# pip install -r requirements.txt

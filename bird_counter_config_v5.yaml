@@ -1,0 +1,93 @@
+# Конфигурация для Bird Detector v5.0
+# Объединяет преимущества v2 и v4.1
+
+# Умный подсчет птиц (из v2, улучшенный в v5.3)
+bird_tracking:
+  enable_tracking: true           # Включить трекинг уникальных птиц
+  bird_timeout_seconds: 30        # Время жизни птицы без детекции (сек)
+  max_simultaneous_birds: 10      # Максимальное количество одновременных птиц
+  enable_visit_counter: true      # Включить счетчик посещений кормушки
+  min_time_between_visits_seconds: 10  # Минимальное время между посещениями (сек)
+
+# Логирование
+logging:
+  enable_text_log: true           # Включить текстовый лог детекций
+  log_format: "markdown"          # Формат лога: markdown, json, csv
+  log_filename_pattern: "bird_log_{timestamp}.md"  # Шаблон имени файла с timestamp
+  logs_path: "./bird_logs"        # Базовый путь для логов
+  console_output_mode: "minimal"  # Режим консольного вывода: "all", "changes_only", "minimal"
+
+# Сохранение кадров
+frame_saving:
+  enable_photo_save: true         # Сохранять фото при обнаружении птиц
+  min_save_interval_seconds: 5    # Минимальный интервал между сохранениями (сек)
+  photo_filename_pattern: "bird_{timestamp}_count{bird_count}.jpg"
+  frames_subfolder: "frames"      # Подпапка для кадров
+
+# Детекция
+detection:
+  target_classes: ["bird"]        # Целевые классы для детекции
+  min_confidence: 0.3             # Минимальная уверенность детекции (0.0-1.0)
+  min_bbox_size: 0.01             # Минимальный размер bounding box
+  max_bbox_size: 0.8              # Максимальный размер bounding box
+
+# Параметры модели Hailo
+hailo_model:
+  hef_path: "/usr/share/hailo-models/yolov8s_h8l.hef"  # Путь к HEF файлу (можно изменить)
+  # Доступные модели для Hailo-8 (семейство акселераторов):
+  #
+  # Модели для Hailo-8L (13 TOPS):
+  # - yolov8s_h8l.hef (баланс производительности ~50 FPS, рекомендуемая)
+  # - yolov8m_h8l.hef (высокая точность, ~30 FPS, лучше для мелких объектов)
+  # - yolov5s_h8l.hef (максимальная скорость ~60 FPS, меньше точность)
+  #
+  # Модели для Hailo-8 (26 TOPS):
+  # - yolov8s_h8.hef (баланс производительности ~80 FPS)
+  # - yolov8m_h8.hef (высокая точность ~50 FPS)
+  # - yolov5s_h8.hef (скорость ~100 FPS)
+  #
+  # Специализированные модели:
+  # - yolov8s_personface_h8l.hef (детекция лиц и людей)
+  # - yolov8s_personface_h8.hef (детекция лиц и людей, Hailo-8)
+  # - yolov5m_traffic_h8l.hef (детекция транспорта)
+  # - yolov5m_traffic_h8.hef (детекция транспорта, Hailo-8)
+  #
+  # Примечание: Проверьте доступные модели командой:
+  # ls /usr/share/hailo-models/ | grep .hef
+
+# Веб-стримы (из v4.1)
+web_streams:
+  stream_mode: "both"             # Режим стрима: "camera_only", "detection_only", "both"
+  enable_camera_stream: true      # Чистый стрим камеры (автоматически)
+  enable_detection_stream: true   # Стрим с детекцией (автоматически)
+  camera_stream_port: 8080        # Порт для чистого стрима
+  detection_stream_port: 8091     # Порт для стрима с детекцией
+  stream_quality: 80              # Качество JPEG (1-100)
+
+# Общие настройки
+general:
+  enable_console_output: true     # Выводить информацию в консоль
+  debug_mode: false               # Режим отладки
+  test_mode: false                # Тестовый режим (без сохранения файлов)
+
+# Статистика и метрики
+statistics:
+  enable_fps_display: true        # Показывать FPS
+  enable_bird_count_display: true # Показывать счетчики птиц
+  update_interval_seconds: 1      # Интервал обновления статистики
+
+# Мониторинг системы
+system_monitoring:
+  enable_temperature_logging: true    # Включить логирование температуры
+  temperature_log_interval_minutes: 0.1  # Интервал логирования температуры (минуты, 0.1 = 6 сек)
+  temperature_log_filename: "system_temperature_{timestamp}.log"  # Шаблон имени файла температуры
+
+# Отладка производительности (для анализа задержек)
+performance_debug:
+  enable_performance_log: false       # Включить детальный лог производительности
+  performance_log_filename: "performance_debug_{timestamp}.log"  # Файл отладочного лога
+
+# Диагностика запуска (для анализа окружения)
+startup_diagnostics:
+  enable_startup_log: true            # Включить лог диагностики запуска
+  startup_log_filename: "startup_diagnostics_{timestamp}.log"  # Файл лога запуска
