@@ -106,7 +106,6 @@ audio:
 21_video_creator/
 ├── video_creator.py              # Основной скрипт
 ├── video_creator_config.yaml     # Конфигурационный файл
-├── video_creator_config_example.yaml  # Пример конфигурации
 ├── requirements.txt              # Зависимости Python
 ├── setup_venv.sh                 # Скрипт настройки
 ├── README.md                     # Эта документация
